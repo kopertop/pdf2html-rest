@@ -35,8 +35,9 @@ RUN cd pdf2htmlEX && cmake . && make && make install
 #
 COPY . /app
 
-# Open port 8000
-EXPOSE 8000
+# Open port 80
+EXPOSE 80
+ENV PORT 80
 
 # Run our app
 WORKDIR /app

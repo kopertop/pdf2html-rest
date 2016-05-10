@@ -19,7 +19,10 @@ process.env.TMPDIR = '/tmp';
 
 http.createServer(function(req, resp){
 	var params = url.parse(req.url, true);
-	if(params && params.query && params.query.url){
+	if(params && params.path === '/status'){
+		resp.writeHead(200, {'Content-Type': 'text/plain'});
+		resp.end('OK');
+	} else if(params && params.query && params.query.url){
 		console.log('Generate PDF', params.query.url);
 		var pdfRequest = request.get(params.query.url);
 

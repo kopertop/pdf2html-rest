@@ -9,7 +9,7 @@ RUN apt-get update
 RUN apt-get install -y git cmake autotools-dev libjpeg-dev libtiff5-dev \
 	libpng12-dev libgif-dev libxt-dev autoconf automake libtool bzip2 libxml2-dev \
 	libuninameslist-dev libspiro-dev python-dev libpango1.0-dev libcairo2-dev \
-	chrpath uuid-dev uthash-dev
+	chrpath uuid-dev uthash-dev ttfautohint
 
 
 #
@@ -35,8 +35,9 @@ RUN cd pdf2htmlEX && cmake . && make && make install
 #
 COPY . /app
 
-# Open port 8000
-EXPOSE 8000
+# Open port 80
+EXPOSE 80
+ENV PORT 80
 
 # Run our app
 WORKDIR /app

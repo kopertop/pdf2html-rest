@@ -14,6 +14,8 @@ var uuid = require('uuid');
 var fs = require('fs');
 
 var PORT= process.env.PORT || 8000
+// NPM overwrites this, that's dumb
+process.env.TMPDIR = '/tmp';
 
 http.createServer(function(req, resp){
 	var params = url.parse(req.url, true);
@@ -39,9 +41,17 @@ http.createServer(function(req, resp){
 			], {
 				cwd: os.tmpdir(),
 			}).on('close', function(code){
-				console.log('DONE', code);
-				resp.writeHead(200, {'Content-Type': 'text/html'});
-				fs.createReadStream(path.join(os.tmpdir(), htmlFileName)).pipe(resp);
+				if(code === 0){
+					console.log('DONE', code);
+					resp.writeHead(200, {'Content-Type': 'text/html'});
+					fs.createReadStream(path.join(os.tmpdir(), htmlFileName)).pipe(resp);
+				} else {
+					resp.writeHead(500, {'Content-Type': 'text/plain'});
+					resp.end('Something went wrong');
+				}
+				// Clean up any temp files
+				fs.unlink(path.join(os.tmpdir(), pdfFileName));
+				fs.unlink(path.join(os.tmpdir(), htmlFileName));
 			});
 		});
 	} else {

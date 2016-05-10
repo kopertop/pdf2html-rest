@@ -1,0 +1,29 @@
+{
+  "name": "pdf2html-rest",
+  "version": "0.0.1",
+  "description": "A Docker build of pdf2htmlEX with a REST API Wrapper",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kopertop/pdf2html-rest.git"
+  },
+  "keywords": [
+    "pdf",
+    "html",
+    "rest",
+    "pdf2htmlEX"
+  ],
+  "author": "Chris Moyer <kopertop@gmail.com>",
+  "license": "Unlicense",
+  "bugs": {
+    "url": "https://github.com/kopertop/pdf2html-rest/issues"
+  },
+  "homepage": "https://github.com/kopertop/pdf2html-rest#readme",
+  "dependencies": {
+    "request": "^2.72.0",
+    "uuid": "^2.0.2"
+  }
+}

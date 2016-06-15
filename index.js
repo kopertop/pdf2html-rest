@@ -36,9 +36,11 @@ http.createServer(function(req, resp){
 			console.log('PDF saved', pdfFileName);
 			child_process.spawn('/usr/local/bin/pdf2htmlEX', [
 				'--external-hint-tool=ttfautohint',
+				'--embed-javascript=0',
+				'--process-outline=0',
+				'--process-type3=1',
 				'--optimize-text=1',
-				'--zoom',
-				'2',
+				'--zoom', '2',
 				pdfFileName,
 				htmlFileName,
 			], {
@@ -57,6 +59,8 @@ http.createServer(function(req, resp){
 				fs.unlink(path.join(os.tmpdir(), htmlFileName));
 			});
 		});
+	} else if(params && params.query && params.query.feed){
+		// Allow parsing an entire feed worth of stories.
 	} else {
 		resp.writeHead(400, {'Content-Type': 'text/plain'});
 		resp.end('You must specify a URL parameter');
